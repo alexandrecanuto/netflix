@@ -4,7 +4,7 @@
 
 This is a sample React project created by me to keep myself up-to-date with the technology and try out a few things.
 
-You can check out the code here or get to know me better at my [website](https://canuto.dev).
+You can check out the code here, visit a demo at [https://netflix.canuto.dev](https://netflix.canuto.dev) or get to know me better at my [website](https://canuto.dev).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
