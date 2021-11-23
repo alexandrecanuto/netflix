@@ -2,8 +2,17 @@ import styled from 'styled-components';
 // Images
 import ProfileImage from '../../assets/images/profile.png';
 
+export const Author = styled.a`
+  font-size: 10px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 export const Container = styled.div`
-  background: ${props => props.isBlack ? 'black' : 'transparent'};
+  background: ${(props) => (props.isBlack ? 'black' : 'transparent')};
   display: flex;
   height: 70px;
   position: fixed;
@@ -43,6 +52,23 @@ export const ProfileButton = styled.button`
   width: 32px;
 `;
 
+export const ProjectInfo = styled.div`
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin-right: 16px;
+`;
+
 export const Spacer = styled.div`
   flex: 1;
+`;
+
+export const Version = styled.div`
+  background: white;
+  border-radius: 4px;
+  color: gray;
+  font-size: 10px;
+  line-height: 10px;
+  opacity: 0.75;
+  padding: 2px 4px 3px;
 `;

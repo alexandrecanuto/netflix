@@ -4,7 +4,19 @@ import { MenuItem } from '../';
 // Images
 import NetflixLogo from '../../assets/images/netflix.svg';
 // Styles
-import { Container, Logo, Menu, Nav, ProfileButton, Spacer } from './styles';
+import {
+  Container,
+  Logo,
+  Menu,
+  Nav,
+  ProfileButton,
+  Spacer,
+  ProjectInfo,
+  Version,
+  Author,
+} from './styles';
+// Version:
+import { version } from '../../../package.json';
 
 const Header = ({ isBlack }) => {
   return (
@@ -21,6 +33,13 @@ const Header = ({ isBlack }) => {
         </Menu>
 
         <Spacer />
+
+        <ProjectInfo>
+          <Version>v{version}</Version>
+          <Author href="https://canuto.dev" target="_blank">
+            made with ♥ by Alex Canuto
+          </Author>
+        </ProjectInfo>
 
         <ProfileButton />
       </Nav>

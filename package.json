@@ -24,7 +24,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cz": "git-cz",
+    "release": "standard-version",
+    "release:prerelease": "standard-version --prerelease"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,5 +48,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cz": "^1.8.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "prettier": "^2.4.1",
+    "standard-version": "^9.3.2"
   }
 }

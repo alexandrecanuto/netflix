@@ -8,14 +8,29 @@ import { getProgram } from '../../store/selectors/programs';
 // Services
 import { APIService } from '../../services';
 // Styles
-import { Buttons, Container, Description, Genres, HorizontalFade, Info, MoreInfoButton, Name, Points, Seasons, VerticalFade, WatchButton, Year } from './styles';
+import {
+  Buttons,
+  Container,
+  Description,
+  Genres,
+  HorizontalFade,
+  Info,
+  MoreInfoButton,
+  Name,
+  Points,
+  Seasons,
+  VerticalFade,
+  WatchButton,
+  Year,
+} from './styles';
 
-const FeaturedProgram = ({item}) => {
+const FeaturedProgram = ({ item }) => {
   const [details, setDetails] = useState();
   const [genres, setGenres] = useState();
   const [seasons, setSeasons] = useState();
   const [year, setYear] = useState();
-  const program = useSelector(state => getProgram(state, item));
+  const program = useSelector((state) => getProgram(state, item));
+  const name = program?.name || program?.title || program?.original_name || program?.original_title;
 
   useEffect(() => {
     // Create an scoped async function in the hook
@@ -24,38 +39,35 @@ const FeaturedProgram = ({item}) => {
       setDetails(details);
 
       // Year:
-      const year = new Date(details.release_date || details.first_air_date).getFullYear();
+      const year = new Date(details?.release_date || details?.first_air_date).getFullYear();
       setYear(year);
 
       // Season / runtime:
-      if (details.runtime) {
-        setSeasons(`${details.runtime} min`);
-      } else if (details.number_of_seasons) {
-        const text = details.number_of_seasons === 1 ? 'season' : 'seasons';
-        setSeasons(`${details.number_of_seasons} ${text}`);
+      if (details?.runtime) {
+        setSeasons(`${details?.runtime} min`);
+      } else if (details?.number_of_seasons) {
+        const text = details?.number_of_seasons === 1 ? 'season' : 'seasons';
+        setSeasons(`${details?.number_of_seasons} ${text}`);
       }
 
-      // Genres: 
-      if (details.genres) {
-        setGenres(details.genres.map(genre => genre.name).join(', '));
+      // Genres:
+      if (details?.genres) {
+        setGenres(details?.genres.map((genre) => genre.name).join(', '));
       }
     }
 
-    fetchDetails();
-  }, [program]);
-
-  if (!details) {
-    return (
-      <Container>
-      </Container>
-    );
-  }
+    try {
+      fetchDetails();
+    } catch (e) {
+      console.log(e);
+    }
+  }, [program, name]);
 
   return (
     <Container backdrop={`https://image.tmdb.org/t/p/original${program.backdrop_path}`}>
       <VerticalFade>
         <HorizontalFade>
-          <Name>{program.original_title || program.original_name}</Name>
+          <Name>{name}</Name>
           <Info>
             <Points>{program.vote_average} votes</Points>
             <Year>{year}</Year>
@@ -70,9 +82,11 @@ const FeaturedProgram = ({item}) => {
               <InfoOutlinedIcon /> More Info
             </MoreInfoButton>
           </Buttons>
-          <Genres>
-            <strong>Genres:</strong> {genres}
-          </Genres>
+          {!!genres && (
+            <Genres>
+              <strong>Genres:</strong> {genres}
+            </Genres>
+          )}
         </HorizontalFade>
       </VerticalFade>
     </Container>
